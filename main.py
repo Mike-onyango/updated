@@ -39,6 +39,7 @@ def home():
 # Login
 @app.route("/login", methods=["POST"])
 def login():
+    #more infomation on code 
     username = request.form['username']
     password = request.form["password"]
     user = User.query.filter_by(username=username).first()
@@ -55,6 +56,7 @@ def sign_up():
     username = request.form['username']
     password = request.form["password"]
     user = User.query.filter_by(username=username).first()
+    #use this to check if the login page has another user 
     if user:
         return render_template("index.html", error="User already here!")
     else:
@@ -73,6 +75,7 @@ def dashboard():
     return redirect(url_for('home'))
 
 # Token selection
+#the game tokens are gotten here
 @app.route('/select_token', methods=["POST"])
 def select_token():
     if "username" in session:
@@ -82,6 +85,7 @@ def select_token():
     return redirect(url_for('home'))
 
 # Logout
+#it will bw found on the last page 
 @app.route("/logout")
 def logout():
     session.pop('username', None)
