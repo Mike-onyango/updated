@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>Welcome to Monopoly</h1>
+    
+    <form id="auth-form" action="{{ url_for('login') }}" method="post">
+        <input 
+           type="text"
+           name="username"
+           placeholder="username"
+           class="input-field"
+        />
+        <input
+            type="password"
+            name="password"
+            placeholder="password"
+            class="input-field"
+        />
+        <input type="submit" value="Login" class="btn btn-login" onclick="setActionForm('login')"/>
+        <input type="button" value="Register" class="btn btn-login" onclick="setActionForm('sign_up')" />
+    </form>
+</div>
+
+<script>
+    function setActionForm(action){
+        let form = document.getElementById("auth-form");
+        if (action === 'login'){
+            form.action = "{{ url_for('login') }}";
+            form.method = "post";
+        } else if(action === 'sign_up'){
+            form.action = "{{ url_for('sign_up') }}";
+            form.method = 'post';
+        }
+        form.submit();
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container"> 
+    <h1> Welcome, {{username}}! </h1>
+    <p>Welcome to your Dashboard</p>
+    
+    {% if selected_token %}
+        <h2>Your selected token: {{ selected_token }}</h2>
+    {% else %}
+        <h2>Select Your Token</h2>
+        <form action="{{ url_for('select_token') }}" method="post">
+            <select name="token">
+                {% for character in marvel_characters %}
+                    <option value="{{ character }}">{{ character }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Select Token" class="btn btn-select-token" />
+        </form>
+    {% endif %}
+    
+    <a href="{{url_for('logout')}}" class="btn btn-logout">Logout</a>
+</div>
+{% endblock %}
+
